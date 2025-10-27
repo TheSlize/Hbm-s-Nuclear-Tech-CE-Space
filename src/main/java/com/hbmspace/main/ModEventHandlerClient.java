@@ -7,6 +7,7 @@ import com.hbm.render.item.BakedModelNoFPV;
 import com.hbm.render.item.TEISRBase;
 import com.hbm.render.tileentity.IItemRendererProvider;
 import com.hbmspace.items.ModItemsSpace;
+import com.hbmspace.render.tileentity.IItemRendererProviderSpace;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -32,7 +33,7 @@ public class ModEventHandlerClient {
         IRegistry<ModelResourceLocation, IBakedModel> reg = evt.getModelRegistry();
         IDynamicModelsSpace.bakeModels(evt);
         for (TileEntitySpecialRenderer<? extends TileEntity> renderer : TileEntityRendererDispatcher.instance.renderers.values()) {
-            if (renderer instanceof IItemRendererProvider prov) {
+            if (renderer instanceof IItemRendererProviderSpace prov) {
                 for (Item item : prov.getItemsForRenderer()) {
                     swapModels(item, reg);
                 }
@@ -40,7 +41,7 @@ public class ModEventHandlerClient {
         }
 
         for (Item renderer : Item.REGISTRY) {
-            if (renderer instanceof IItemRendererProvider provider) {
+            if (renderer instanceof IItemRendererProviderSpace provider) {
                 for (Item item : provider.getItemsForRenderer()) {
                     swapModels(item, reg);
                 }
