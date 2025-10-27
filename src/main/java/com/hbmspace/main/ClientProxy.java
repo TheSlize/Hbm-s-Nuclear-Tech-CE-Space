@@ -20,8 +20,6 @@ public class ClientProxy extends ServerProxy {
     public void registerRenderInfo() {
         if (!Minecraft.getMinecraft().getFramebuffer().isStencilEnabled())
             Minecraft.getMinecraft().getFramebuffer().enableStencil();
-
-        MinecraftForge.EVENT_BUS.register(new ModEventHandlerClient());
     }
 
     @Override

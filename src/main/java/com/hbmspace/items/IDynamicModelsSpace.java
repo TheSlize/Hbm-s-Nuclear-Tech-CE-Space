@@ -1,12 +1,12 @@
 package com.hbmspace.items;
 
+import com.hbm.items.IDynamicModels;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.model.ModelLoader;
@@ -20,7 +20,7 @@ import java.util.List;
  * Used in items that require model baking;
  * Will automatically bake once correct methods are supplied (space version just to separate this shit)
  */
-public interface IDynamicModelsSpace {
+public interface IDynamicModelsSpace extends IDynamicModels {
 
     /**
      * Should be populated by implementors in constructors.
@@ -79,36 +79,4 @@ public interface IDynamicModelsSpace {
             evt.getBlockColors().registerBlockColorHandler(colorHandler, item);
         }
     }
-
-
-    @SideOnly(Side.CLIENT)
-    default IItemColor getItemColorHandler() {
-        return null;
-    }
-
-    @SideOnly(Side.CLIENT)
-    default IBlockColor getBlockColorHandler() {
-        return null;
-    }
-
-
-    @SideOnly(Side.CLIENT)
-    default StateMapperBase getStateMapper(ResourceLocation loc) {
-        return null;
-    }
-
-    @SideOnly(Side.CLIENT)
-    void bakeModel(ModelBakeEvent event);
-
-    default Object getSelf() {
-        return this;
-    }
-
-
-    @SideOnly(Side.CLIENT)
-    void registerModel();
-
-    @SideOnly(Side.CLIENT)
-    void registerSprite(TextureMap map);
-
 }

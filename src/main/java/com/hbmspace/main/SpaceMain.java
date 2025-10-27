@@ -1,14 +1,12 @@
 package com.hbmspace.main;
 
 import com.hbmspace.blocks.ModBlocksSpace;
-import com.hbmspace.handler.GuiHandler;
 import com.hbmspace.items.ModItemsSpace;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.apache.logging.log4j.Logger;
 /**
  * Okay, so if you read this
@@ -41,7 +39,6 @@ public class SpaceMain {
 
         AutoRegistrySpace.registerTileEntities();
         AutoRegistrySpace.loadAuxiliaryData();
-        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
     }
 
     @EventHandler

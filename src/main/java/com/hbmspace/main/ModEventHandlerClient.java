@@ -21,12 +21,14 @@ import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+@Mod.EventBusSubscriber(modid = RefStrings.MODID)
 public class ModEventHandlerClient {
 
     @SubscribeEvent
-    public void modelBaking(ModelBakeEvent evt) {
+    public static void modelBaking(ModelBakeEvent evt) {
         IRegistry<ModelResourceLocation, IBakedModel> reg = evt.getModelRegistry();
         IDynamicModelsSpace.bakeModels(evt);
         for (TileEntitySpecialRenderer<? extends TileEntity> renderer : TileEntityRendererDispatcher.instance.renderers.values()) {
@@ -47,7 +49,7 @@ public class ModEventHandlerClient {
     }
 
     @SubscribeEvent
-    public void registerModels(ModelRegistryEvent event) {
+    public static void registerModels(ModelRegistryEvent event) {
         for (Item item : ModItemsSpace.ALL_ITEMS) {
             try {
                 registerModel(item, 0);
@@ -65,18 +67,18 @@ public class ModEventHandlerClient {
     }
 
     @SubscribeEvent
-    public void textureStitch(TextureStitchEvent.Pre evt) {
+    public static void textureStitch(TextureStitchEvent.Pre evt) {
         TextureMap map = evt.getMap();
         IDynamicModelsSpace.registerSprites(map);
     }
 
-    private void registerModel(Item item, int meta) {
+    private static void registerModel(Item item, int meta) {
         if(!(item instanceof IDynamicModelsSpace dyn && dyn.INSTANCES.contains(item))) {
             ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName(), "inventory"));
         }
     }
 
-    private void registerBlockModel(Block block, int meta) {
+    private static void registerBlockModel(Block block, int meta) {
         registerModel(Item.getItemFromBlock(block), meta);
     }
 
