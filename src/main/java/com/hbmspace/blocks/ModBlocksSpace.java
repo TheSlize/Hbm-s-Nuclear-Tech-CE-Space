@@ -9,10 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ModBlocksSpace {
+    public static List<Block> ALL_BLOCKS = new ArrayList<>();
 
     public static final Block machine_lpw2 = new MachineLPW2("machine_lpw2").setHardness(5.0F).setResistance(100.0F).setCreativeTab(MainRegistry.machineTab);
-
-    public static List<Block> ALL_BLOCKS = new ArrayList<>();
 
     public static void preInit(){
         for(Block block : ALL_BLOCKS){
