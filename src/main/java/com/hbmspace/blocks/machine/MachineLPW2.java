@@ -1,7 +1,6 @@
-package com.hbm.blocks.machine;
+package com.hbmspace.blocks.machine;
 
-import com.hbm.blocks.BlockDummyable;
-import com.hbm.blocks.BlockDummyableSpace;
+import com.hbmspace.blocks.BlockDummyableSpace;
 import com.hbm.blocks.ILookOverlay;
 import com.hbm.dim.CelestialBody;
 import com.hbm.inventory.fluid.tank.FluidTankNTM;

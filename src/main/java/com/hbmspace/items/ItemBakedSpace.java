@@ -1,4 +1,7 @@
-package com.hbm.items;
+package com.hbmspace.items;
+
+import com.hbm.items.ItemBakedBase;
+import com.hbm.items.ModItems;
 
 public class ItemBakedSpace extends ItemBakedBase {
 

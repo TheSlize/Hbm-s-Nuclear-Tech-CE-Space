@@ -1,4 +1,4 @@
-package com.hbm.tileentity.machine;
+package com.hbmspace.tileentity.machine;
 
 import com.hbm.api.fluid.IFluidStandardReceiver;
 import com.hbm.api.tile.IPropulsion;

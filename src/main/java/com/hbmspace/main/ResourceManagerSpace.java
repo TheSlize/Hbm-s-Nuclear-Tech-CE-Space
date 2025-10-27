@@ -1,4 +1,4 @@
-package com.hbm.main;
+package com.hbmspace.main;
 
 import com.hbm.hfr.render.loader.HFRWavefrontObject;
 import com.hbm.render.amlfrom1710.IModelCustom;

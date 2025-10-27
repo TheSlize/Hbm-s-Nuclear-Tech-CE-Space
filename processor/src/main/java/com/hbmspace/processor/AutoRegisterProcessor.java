@@ -179,9 +179,9 @@ public class AutoRegisterProcessor extends AbstractProcessor {
         ClassName RESOURCE_LOCATION = ClassName.get("net.minecraft.util", "ResourceLocation");
         ClassName SIDE_ONLY = ClassName.get("net.minecraftforge.fml.relauncher", "SideOnly");
         ClassName SIDE = ClassName.get("net.minecraftforge.fml.relauncher", "Side");
-        ClassName REF_STRINGS = ClassName.get("com.hbm.main", "RefStrings");
-        ClassName MAIN_REGISTRY = ClassName.get("com.hbm.main", "SpaceMain");
-        ClassName MOD_ITEMS = ClassName.get("com.hbm.items", "ModItemsSpace");
+        ClassName REF_STRINGS = ClassName.get("com.hbmspace.main", "RefStrings");
+        ClassName MAIN_REGISTRY = ClassName.get("com.hbmspace.main", "SpaceMain");
+        ClassName MOD_ITEMS = ClassName.get("com.hbmspace.items", "ModItemsSpace");
         ClassName ICONFIGURABLE_MACHINE = ClassName.get("com.hbm.tileentity", "IConfigurableMachine");
         TypeSpec.Builder registrarBuilder =
                 TypeSpec.classBuilder("GeneratedHBMRegistrarSpace").addModifiers(Modifier.PUBLIC, Modifier.FINAL).addJavadoc("AUTO-GENERATED FILE. DO NOT MODIFY.");
@@ -259,7 +259,7 @@ public class AutoRegisterProcessor extends AbstractProcessor {
             }
             registrarBuilder.addMethod(method.build());
         }
-        JavaFile.builder("com.hbm.generated", registrarBuilder.build()).addFileComment("AUTO-GENERATED FILE. DO NOT MODIFY.").indent("    ").build().writeTo(filer);
+        JavaFile.builder("com.hbmspace.generated", registrarBuilder.build()).addFileComment("AUTO-GENERATED FILE. DO NOT MODIFY.").indent("    ").build().writeTo(filer);
     }
 
     private String generateRegistrationId(String name) {

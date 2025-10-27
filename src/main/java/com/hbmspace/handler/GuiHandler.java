@@ -1,4 +1,4 @@
-package com.hbm.handler;
+package com.hbmspace.handler;
 
 import com.hbm.tileentity.IGUIProvider;
 import net.minecraft.block.Block;

@@ -1,12 +1,12 @@
-package com.hbm.main;
+package com.hbmspace.main;
 
-import com.hbm.blocks.ModBlocks;
-import com.hbm.items.IDynamicModelsSpace;
-import com.hbm.items.ModItems;
+import com.hbmspace.blocks.ModBlocksSpace;
+import com.hbmspace.items.IDynamicModelsSpace;
 import com.hbm.render.item.BakedModelCustom;
 import com.hbm.render.item.BakedModelNoFPV;
 import com.hbm.render.item.TEISRBase;
 import com.hbm.render.tileentity.IItemRendererProvider;
+import com.hbmspace.items.ModItemsSpace;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -48,15 +48,15 @@ public class ModEventHandlerClient {
 
     @SubscribeEvent
     public void registerModels(ModelRegistryEvent event) {
-        for (Item item : ModItems.ALL_ITEMS) {
+        for (Item item : ModItemsSpace.ALL_ITEMS) {
             try {
                 registerModel(item, 0);
             } catch (NullPointerException e) {
                 e.printStackTrace();
-                MainRegistry.logger.info("Failed to register model for " + item.getRegistryName());
+                SpaceMain.logger.info("Failed to register model for " + item.getRegistryName());
             }
         }
-        for (Block block : ModBlocks.ALL_BLOCKS) {
+        for (Block block : ModBlocksSpace.ALL_BLOCKS) {
             registerBlockModel(block, 0);
         }
 

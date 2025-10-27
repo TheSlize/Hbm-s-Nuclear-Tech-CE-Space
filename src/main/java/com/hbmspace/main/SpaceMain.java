@@ -1,8 +1,8 @@
-package com.hbm.main;
+package com.hbmspace.main;
 
-import com.hbm.blocks.ModBlocksSpace;
-import com.hbm.handler.GuiHandler;
-import com.hbm.items.ModItemsSpace;
+import com.hbmspace.blocks.ModBlocksSpace;
+import com.hbmspace.handler.GuiHandler;
+import com.hbmspace.items.ModItemsSpace;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -39,8 +39,8 @@ public class SpaceMain {
         ModItemsSpace.preInit();
         ModBlocksSpace.preInit();
 
-        AutoRegistry.registerTileEntities();
-        AutoRegistry.loadAuxiliaryData();
+        AutoRegistrySpace.registerTileEntities();
+        AutoRegistrySpace.loadAuxiliaryData();
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
     }
 

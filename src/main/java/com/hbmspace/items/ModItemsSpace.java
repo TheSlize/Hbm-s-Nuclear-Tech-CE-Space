@@ -1,8 +1,7 @@
-package com.hbm.items;
+package com.hbmspace.items;
 
 import com.hbm.blocks.ICustomBlockItem;
-import com.hbm.blocks.ModBlocksSpace;
-import com.hbm.items.weapon.sedna.factory.GunFactory;
+import com.hbmspace.blocks.ModBlocksSpace;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;

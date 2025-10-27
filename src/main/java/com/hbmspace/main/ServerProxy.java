@@ -1,4 +1,4 @@
-package com.hbm.main;
+package com.hbmspace.main;
 
 import com.hbm.handler.HbmKeybinds;
 import com.hbm.sound.AudioWrapper;

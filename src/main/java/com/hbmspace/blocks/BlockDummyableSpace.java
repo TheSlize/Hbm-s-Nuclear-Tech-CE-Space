@@ -1,9 +1,10 @@
-package com.hbm.blocks;
+package com.hbmspace.blocks;
 
 import com.google.common.collect.ImmutableMap;
+import com.hbm.blocks.ICustomBlockHighlight;
 import com.hbm.handler.MultiblockHandlerXR;
 import com.hbm.interfaces.ICopiable;
-import com.hbm.items.IDynamicModelsSpace;
+import com.hbmspace.items.IDynamicModelsSpace;
 import com.hbm.lib.ForgeDirection;
 import com.hbm.lib.InventoryHelper;
 import com.hbm.main.MainRegistry;

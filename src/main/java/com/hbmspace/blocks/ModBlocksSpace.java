@@ -1,6 +1,6 @@
-package com.hbm.blocks;
+package com.hbmspace.blocks;
 
-import com.hbm.blocks.machine.MachineLPW2;
+import com.hbmspace.blocks.machine.MachineLPW2;
 import com.hbm.main.MainRegistry;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;

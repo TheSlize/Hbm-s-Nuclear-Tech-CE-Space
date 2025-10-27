@@ -1,4 +1,4 @@
-package com.hbm.render.tileentity;
+package com.hbmspace.render.tileentity;
 
 import com.hbm.render.item.ItemRenderBase;
 import net.minecraft.item.Item;

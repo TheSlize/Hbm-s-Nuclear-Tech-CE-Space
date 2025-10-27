@@ -1,4 +1,4 @@
-package com.hbm.items;
+package com.hbmspace.items;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;

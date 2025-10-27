@@ -1,9 +1,9 @@
-package com.hbm.render.tileentity;
+package com.hbmspace.render.tileentity;
 
 import com.hbm.blocks.BlockDummyable;
 import com.hbm.blocks.ModBlocks;
 import com.hbmspace.interfaces.AutoRegister;
-import com.hbm.main.ResourceManagerSpace;
+import com.hbmspace.main.ResourceManagerSpace;
 import com.hbm.render.item.ItemRenderBase;
 import com.hbm.tileentity.machine.TileEntityMachineLPW2;
 import com.hbm.util.BobMathUtil;
