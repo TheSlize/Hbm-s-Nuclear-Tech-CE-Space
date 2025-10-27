@@ -20,12 +20,12 @@ import java.util.List;
  * Used in items that require model baking;
  * Will automatically bake once correct methods are supplied (space version just to separate this shit)
  */
-public interface IDynamicModels {
+public interface IDynamicModelsSpace {
 
     /**
      * Should be populated by implementors in constructors.
      */
-    List<IDynamicModels> INSTANCES = new ArrayList<>();
+    List<IDynamicModelsSpace> INSTANCES = new ArrayList<>();
 
     @SideOnly(Side.CLIENT)
     static void bakeModels(ModelBakeEvent event) {
@@ -34,7 +34,7 @@ public interface IDynamicModels {
 
     @SideOnly(Side.CLIENT)
     static void registerModels() {
-        INSTANCES.forEach(IDynamicModels::registerModel);
+        INSTANCES.forEach(IDynamicModelsSpace::registerModel);
     }
 
     @SideOnly(Side.CLIENT)
@@ -44,7 +44,7 @@ public interface IDynamicModels {
 
     @SideOnly(Side.CLIENT)
     public static void registerCustomStateMappers() {
-        for (IDynamicModels model : INSTANCES) {
+        for (IDynamicModelsSpace model : INSTANCES) {
             if (model.getSelf() == null || !(model.getSelf() instanceof Block block)) continue;
             StateMapperBase mapper = model.getStateMapper(block.getRegistryName());
             if (mapper != null)
@@ -58,7 +58,7 @@ public interface IDynamicModels {
 
     @SideOnly(Side.CLIENT)
     static void registerItemColorHandlers(ColorHandlerEvent.Item evt) {
-        for (IDynamicModels model : INSTANCES) {
+        for (IDynamicModelsSpace model : INSTANCES) {
             IItemColor colorHandler = model.getItemColorHandler();
             Object self = model.getSelf();
 
@@ -70,7 +70,7 @@ public interface IDynamicModels {
 
     @SideOnly(Side.CLIENT)
     static void registerBlockColorHandlers(ColorHandlerEvent.Block evt) {
-        for (IDynamicModels model : INSTANCES) {
+        for (IDynamicModelsSpace model : INSTANCES) {
             IBlockColor colorHandler = model.getBlockColorHandler();
             Object self = model.getSelf();
 

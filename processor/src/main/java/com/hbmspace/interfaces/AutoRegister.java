@@ -1,4 +1,6 @@
-package com.hbm.interfaces;
+package com.hbmspace.interfaces;
+
+import com.hbmspace.processor.AutoRegisterProcessor;
 
 import java.lang.annotation.*;
 
@@ -32,7 +34,7 @@ import java.lang.annotation.*;
  *       generated automatically from the class name (e.g., {@code TileEntityAwesome} becomes {@code "tileentity_awesome"}).</li>
  * </ul>
  *
- * @see com.hbm.processor.AutoRegisterProcessor The annotation processor that handles this annotation.
+ * @see AutoRegisterProcessor The annotation processor that handles this annotation.
  */
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.TYPE)

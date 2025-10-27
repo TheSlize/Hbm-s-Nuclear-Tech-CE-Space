@@ -3,7 +3,7 @@ package com.hbm.blocks;
 import com.google.common.collect.ImmutableMap;
 import com.hbm.handler.MultiblockHandlerXR;
 import com.hbm.interfaces.ICopiable;
-import com.hbm.items.IDynamicModels;
+import com.hbm.items.IDynamicModelsSpace;
 import com.hbm.lib.ForgeDirection;
 import com.hbm.lib.InventoryHelper;
 import com.hbm.main.MainRegistry;
@@ -52,7 +52,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public abstract class BlockDummyableSpace extends BlockContainer implements ICustomBlockHighlight, ICopiable, INBTBlockTransformable, IDynamicModels {
+public abstract class BlockDummyableSpace extends BlockContainer implements ICustomBlockHighlight, ICopiable, INBTBlockTransformable, IDynamicModelsSpace {
 
     //Drillgon200: I'm far to lazy to figure out what all the meta values should be translated to in properties
     public static final PropertyInteger META = PropertyInteger.create("meta", 0, 15);
@@ -64,7 +64,7 @@ public abstract class BlockDummyableSpace extends BlockContainer implements ICus
         this.setTickRandomly(true);
 
         ModBlocksSpace.ALL_BLOCKS.add(this);
-        IDynamicModels.INSTANCES.add(this);
+        IDynamicModelsSpace.INSTANCES.add(this);
     }
 
     public BlockDummyableSpace(Material materialIn, String s, boolean useBakedModel) {

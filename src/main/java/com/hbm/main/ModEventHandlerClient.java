@@ -1,14 +1,10 @@
 package com.hbm.main;
 
 import com.hbm.blocks.ModBlocks;
-import com.hbm.items.IDynamicModels;
+import com.hbm.items.IDynamicModelsSpace;
 import com.hbm.items.ModItems;
-import com.hbm.items.machine.ItemMold;
-import com.hbm.items.special.ItemAutogen;
-import com.hbm.items.special.ItemBedrockOreNew;
 import com.hbm.render.item.BakedModelCustom;
 import com.hbm.render.item.BakedModelNoFPV;
-import com.hbm.render.item.BakedModelNoGui;
 import com.hbm.render.item.TEISRBase;
 import com.hbm.render.tileentity.IItemRendererProvider;
 import net.minecraft.block.Block;
@@ -32,7 +28,7 @@ public class ModEventHandlerClient {
     @SubscribeEvent
     public void modelBaking(ModelBakeEvent evt) {
         IRegistry<ModelResourceLocation, IBakedModel> reg = evt.getModelRegistry();
-        IDynamicModels.bakeModels(evt);
+        IDynamicModelsSpace.bakeModels(evt);
         for (TileEntitySpecialRenderer<? extends TileEntity> renderer : TileEntityRendererDispatcher.instance.renderers.values()) {
             if (renderer instanceof IItemRendererProvider prov) {
                 for (Item item : prov.getItemsForRenderer()) {
@@ -64,18 +60,18 @@ public class ModEventHandlerClient {
             registerBlockModel(block, 0);
         }
 
-        IDynamicModels.registerModels();
-        IDynamicModels.registerCustomStateMappers();
+        IDynamicModelsSpace.registerModels();
+        IDynamicModelsSpace.registerCustomStateMappers();
     }
 
     @SubscribeEvent
     public void textureStitch(TextureStitchEvent.Pre evt) {
         TextureMap map = evt.getMap();
-        IDynamicModels.registerSprites(map);
+        IDynamicModelsSpace.registerSprites(map);
     }
 
     private void registerModel(Item item, int meta) {
-        if(!(item instanceof IDynamicModels dyn && dyn.INSTANCES.contains(item))) {
+        if(!(item instanceof IDynamicModelsSpace dyn && dyn.INSTANCES.contains(item))) {
             ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName(), "inventory"));
         }
     }
@@ -91,16 +87,6 @@ public class ModEventHandlerClient {
         if (render instanceof TEISRBase) {
             ((TEISRBase) render).itemModel = model;
             reg.putObject(loc, new BakedModelCustom((TEISRBase) render));
-        }
-    }
-
-    public static void swapModelsNoGui(Item item, IRegistry<ModelResourceLocation, IBakedModel> reg) {
-        ModelResourceLocation loc = new ModelResourceLocation(item.getRegistryName(), "inventory");
-        IBakedModel model = reg.getObject(loc);
-        TileEntityItemStackRenderer render = item.getTileEntityItemStackRenderer();
-        if (render instanceof TEISRBase) {
-            ((TEISRBase) render).itemModel = model;
-            reg.putObject(loc, new BakedModelNoGui((TEISRBase) render));
         }
     }
 

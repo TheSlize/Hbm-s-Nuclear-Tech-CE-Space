@@ -1,8 +1,8 @@
-package com.hbm.processor;
+package com.hbmspace.processor;
 
 import com.google.auto.service.AutoService;
-import com.hbm.interfaces.AutoRegister;
-import com.hbm.interfaces.AutoRegisterContainer;
+import com.hbmspace.interfaces.AutoRegister;
+import com.hbmspace.interfaces.AutoRegisterContainer;
 import com.squareup.javapoet.*;
 
 import javax.annotation.processing.*;
@@ -22,8 +22,8 @@ import java.util.*;
 
 @AutoService(Processor.class)
 @SupportedAnnotationTypes({
-        "com.hbm.interfaces.AutoRegister",
-        "com.hbm.interfaces.AutoRegisterContainer"
+        "com.hbmspace.interfaces.AutoRegister",
+        "com.hbmspace.interfaces.AutoRegisterContainer"
 })
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class AutoRegisterProcessor extends AbstractProcessor {

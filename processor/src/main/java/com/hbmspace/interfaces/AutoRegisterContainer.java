@@ -1,4 +1,4 @@
-package com.hbm.interfaces;
+package com.hbmspace.interfaces;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
