@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.hbmspace.mixin.mod",
+  "plugin": "com.hbmspace.mixin.mod.ModMixinConfigPlugin",
+  "compatibilityLevel": "JAVA_8",
+  "target": "@env(MOD)",
+  "client": [
+  ],
+  "mixins": [
+  ],
+  "server": [],
+  "setSourceFile": true,
+  "minVersion": "0.8.7"
+}

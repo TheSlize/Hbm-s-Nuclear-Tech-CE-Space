@@ -563,8 +563,8 @@ dependencies {
         testCompileOnly "me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0"
     }
 
-    compileOnlyApi 'org.jetbrains:annotations:24.1.0'
-    annotationProcessor 'org.jetbrains:annotations:24.1.0'
+    compileOnlyApi 'org.jetbrains:annotations:26.0.2'
+    annotationProcessor 'org.jetbrains:annotations:26.0.2'
     patchedMinecraft('net.minecraft:launchwrapper:1.17.2') {
         transitive = false
     }
@@ -1443,16 +1443,8 @@ boolean performBuildScriptUpdate() {
     return false
 }
 
-boolean isNewBuildScriptVersionAvailable() {
-    Map parameters = ["connectTimeout": 10000, "readTimeout": 10000]
-
-    String currentBuildScript = getFile("build.gradle").getText()
-    String currentBuildScriptHash = getVersionHash(currentBuildScript)
-    String availableBuildScript = availableBuildScriptUrl().newInputStream(parameters).getText()
-    String availableBuildScriptHash = getVersionHash(availableBuildScript)
-
-    boolean isUpToDate = currentBuildScriptHash.empty || availableBuildScriptHash.empty || currentBuildScriptHash == availableBuildScriptHash
-    return !isUpToDate
+static boolean isNewBuildScriptVersionAvailable() {
+    return false
 }
 
 static String getVersionHash(String buildScriptContent) {
