@@ -5,7 +5,6 @@ import com.hbmspace.items.IDynamicModelsSpace;
 import com.hbm.render.item.BakedModelCustom;
 import com.hbm.render.item.BakedModelNoFPV;
 import com.hbm.render.item.TEISRBase;
-import com.hbm.render.tileentity.IItemRendererProvider;
 import com.hbmspace.items.ModItemsSpace;
 import com.hbmspace.render.tileentity.IItemRendererProviderSpace;
 import net.minecraft.block.Block;

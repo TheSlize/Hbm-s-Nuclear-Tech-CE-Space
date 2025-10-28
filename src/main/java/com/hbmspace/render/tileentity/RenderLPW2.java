@@ -1,12 +1,12 @@
 package com.hbmspace.render.tileentity;
 
 import com.hbm.blocks.BlockDummyable;
-import com.hbm.blocks.ModBlocks;
+import com.hbmspace.blocks.ModBlocksSpace;
 import com.hbmspace.interfaces.AutoRegister;
 import com.hbmspace.main.ResourceManagerSpace;
 import com.hbm.render.item.ItemRenderBase;
-import com.hbm.tileentity.machine.TileEntityMachineLPW2;
 import com.hbm.util.BobMathUtil;
+import com.hbmspace.tileentity.machine.TileEntityMachineLPW2;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -159,7 +159,7 @@ public class RenderLPW2 extends TileEntitySpecialRenderer<TileEntityMachineLPW2>
 
     @Override
     public Item getItemForRenderer() {
-        return Item.getItemFromBlock(ModBlocks.machine_lpw2);
+        return Item.getItemFromBlock(ModBlocksSpace.machine_lpw2);
     }
 
     @Override

@@ -25,6 +25,8 @@ public class ClientProxy extends ServerProxy {
     public void registerRenderInfo() {
         if (!Minecraft.getMinecraft().getFramebuffer().isStencilEnabled())
             Minecraft.getMinecraft().getFramebuffer().enableStencil();
+
+        AutoRegistrySpace.registerRenderInfo();
     }
     @Override
     public void preInit(FMLPreInitializationEvent evt) {

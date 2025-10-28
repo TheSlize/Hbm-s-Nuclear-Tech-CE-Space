@@ -36,8 +36,8 @@ public class SpaceMain {
         proxy.registerRenderInfo();
         proxy.preInit(event);
 
-        ModItemsSpace.preInit();
         ModBlocksSpace.preInit();
+        ModItemsSpace.preInit();
 
         AutoRegistrySpace.registerTileEntities();
         AutoRegistrySpace.loadAuxiliaryData();
