@@ -1,6 +1,7 @@
 package com.hbmspace.render.tileentity;
 
 import com.hbm.blocks.BlockDummyable;
+import com.hbm.render.util.ViewModelPositonDebugger;
 import com.hbmspace.blocks.ModBlocksSpace;
 import com.hbmspace.interfaces.AutoRegister;
 import com.hbmspace.main.ResourceManagerSpace;
@@ -9,12 +10,18 @@ import com.hbm.util.BobMathUtil;
 import com.hbmspace.tileentity.machine.TileEntityMachineLPW2;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.Item;
 import org.lwjgl.opengl.GL11;
 
 @AutoRegister
 public class RenderLPW2 extends TileEntitySpecialRenderer<TileEntityMachineLPW2> implements IItemRendererProviderSpace {
+    // not sure if they should be applied to every tile here, but that applies for every thruster at least
+    public static ViewModelPositonDebugger offsets = new ViewModelPositonDebugger()
+            .get(ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND)
+            .setScale(1.0).setRotation(25, -150, 0).setPosition(-1.5, 0.75, 0.5)
+            .getHelper();
 
     @Override
     public void render(TileEntityMachineLPW2 te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
@@ -26,11 +33,11 @@ public class RenderLPW2 extends TileEntitySpecialRenderer<TileEntityMachineLPW2>
         GlStateManager.enableLighting();
         GlStateManager.shadeModel(GL11.GL_SMOOTH);
 
-        switch(te.getBlockMetadata() - BlockDummyable.offset) {
-            case 2: GlStateManager.rotate(90, 0F, 1F, 0F); break;
-            case 4: GlStateManager.rotate(180, 0F, 1F, 0F); break;
-            case 3: GlStateManager.rotate(270, 0F, 1F, 0F); break;
-            case 5: GlStateManager.rotate(0, 0F, 1F, 0F); break;
+        switch (te.getBlockMetadata() - BlockDummyable.offset) {
+            case 2 -> GlStateManager.rotate(90, 0F, 1F, 0F);
+            case 4 -> GlStateManager.rotate(180, 0F, 1F, 0F);
+            case 3 -> GlStateManager.rotate(270, 0F, 1F, 0F);
+            case 5 -> GlStateManager.rotate(0, 0F, 1F, 0F);
         }
 
         long time = te.getWorld().getTotalWorldTime();
@@ -138,9 +145,6 @@ public class RenderLPW2 extends TileEntitySpecialRenderer<TileEntityMachineLPW2>
 
         ResourceManagerSpace.lpw2.renderPart("Monitor");
 
-		/*Minecraft.getMinecraft().getTextureManager().bindTexture(ResourceManager.lpw2_term_tex);
-		ResourceManager.lpw2.renderPart("Screen");*/
-
         Minecraft.getMinecraft().getTextureManager().bindTexture(ResourceManagerSpace.lpw2_error_tex);
 
         GlStateManager.matrixMode(GL11.GL_TEXTURE);
@@ -171,6 +175,7 @@ public class RenderLPW2 extends TileEntitySpecialRenderer<TileEntityMachineLPW2>
             }
 
             public void renderCommon() {
+                if(type == ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND) offsets.apply(type);
                 GlStateManager.scale(0.5, 0.5, 0.5);
                 GlStateManager.shadeModel(GL11.GL_SMOOTH);
                 bindTexture(ResourceManagerSpace.lpw2_tex);

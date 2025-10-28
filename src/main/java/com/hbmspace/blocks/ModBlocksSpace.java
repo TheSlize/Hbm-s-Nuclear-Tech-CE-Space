@@ -1,8 +1,12 @@
 package com.hbmspace.blocks;
 
+import com.hbmspace.blocks.machine.MachineHTR3;
+import com.hbmspace.blocks.machine.MachineHTRF4;
+import com.hbmspace.blocks.machine.MachineXenonThruster;
 import com.hbmspace.blocks.machine.MachineLPW2;
 import com.hbm.main.MainRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.ArrayList;
@@ -12,6 +16,9 @@ public class ModBlocksSpace {
     public static List<Block> ALL_BLOCKS = new ArrayList<>();
 
     public static final Block machine_lpw2 = new MachineLPW2("machine_lpw2").setHardness(5.0F).setResistance(100.0F).setCreativeTab(MainRegistry.machineTab);
+    public static final Block machine_htr3 = new MachineHTR3("machine_htr3").setHardness(5.0F).setResistance(100.0F).setCreativeTab(MainRegistry.machineTab);
+    public static final Block machine_htrf4 = new MachineHTRF4("machine_htrf4").setHardness(5.0F).setResistance(100.0F).setCreativeTab(MainRegistry.machineTab);
+    public static final Block machine_xenon_thruster = new MachineXenonThruster(Material.IRON, "machine_xenon_thruster").setHardness(5.0F).setResistance(100.0F).setCreativeTab(MainRegistry.machineTab);
 
     public static void preInit(){
         for(Block block : ALL_BLOCKS){

@@ -33,11 +33,12 @@ public class SpaceMain {
         if (logger == null)
             logger = event.getModLog();
 
+
+        ModItemsSpace.preInit();
+        ModBlocksSpace.preInit();
+
         proxy.registerRenderInfo();
         proxy.preInit(event);
-
-        ModBlocksSpace.preInit();
-        ModItemsSpace.preInit();
 
         AutoRegistrySpace.registerTileEntities();
         AutoRegistrySpace.loadAuxiliaryData();
