@@ -1,10 +1,11 @@
 package com.hbmspace.main;
 
-import com.hbmspace.blocks.ModBlocksSpace;
-import com.hbmspace.items.IDynamicModelsSpace;
 import com.hbm.render.item.BakedModelCustom;
 import com.hbm.render.item.BakedModelNoFPV;
 import com.hbm.render.item.TEISRBase;
+import com.hbmspace.blocks.ModBlocksSpace;
+import com.hbmspace.dim.WorldProviderCelestial;
+import com.hbmspace.items.IDynamicModelsSpace;
 import com.hbmspace.items.ModItemsSpace;
 import com.hbmspace.render.tileentity.IItemRendererProviderSpace;
 import net.minecraft.block.Block;
@@ -17,12 +18,16 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.registry.IRegistry;
+import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GLContext;
 
 @Mod.EventBusSubscriber(modid = RefStrings.MODID)
 public class ModEventHandlerClient {
@@ -46,6 +51,8 @@ public class ModEventHandlerClient {
                 }
             }
         }
+
+        SpaceMain.proxy.registerMissileItems(reg);
     }
 
     @SubscribeEvent
@@ -99,6 +106,24 @@ public class ModEventHandlerClient {
         if (render instanceof TEISRBase) {
             ((TEISRBase) render).itemModel = model;
             reg.putObject(loc, new BakedModelNoFPV((TEISRBase) render, model));
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOW)
+    public static void thickenFog(EntityViewRenderEvent.FogDensity event) {
+        if(event.getEntity().world.provider instanceof WorldProviderCelestial provider) {
+            float fogDensity = provider.fogDensity();
+
+            if(fogDensity > 0) {
+                if(GLContext.getCapabilities().GL_NV_fog_distance) {
+                    GL11.glFogi(34138, 34139);
+                }
+                GL11.glFogi(GL11.GL_FOG_MODE, GL11.GL_EXP);
+
+                event.setDensity(fogDensity);
+                event.setCanceled(true);
+
+            }
         }
     }
 

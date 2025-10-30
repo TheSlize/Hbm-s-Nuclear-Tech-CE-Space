@@ -1,15 +1,23 @@
 package com.hbmspace.main;
 
+import com.hbm.main.ModEventHandlerClient;
+import com.hbm.render.item.ItemRenderMissilePart;
+import com.hbm.render.misc.MissilePart;
 import com.hbm.sound.AudioWrapper;
 import com.hbm.sound.AudioWrapperClient;
+import com.hbmspace.render.misc.RocketPart;
 import com.hbmspace.render.tileentity.IItemRendererProviderSpace;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.registry.IRegistry;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import java.io.File;
@@ -46,6 +54,20 @@ public class ClientProxy extends ServerProxy {
                 }
             }
         }
+    }
+
+    @Override
+    public void registerMissileItems(IRegistry<ModelResourceLocation, IBakedModel> reg) {
+        RocketPart.registerAllParts();
+
+        RocketPart.parts.values().forEach(part -> {
+            registerItemRenderer(part.part, new ItemRenderMissilePart(part), reg);
+        });
+    }
+
+    public static void registerItemRenderer(Item i, TileEntityItemStackRenderer render, IRegistry<ModelResourceLocation, IBakedModel> reg) {
+        i.setTileEntityItemStackRenderer(render);
+        ModEventHandlerClient.swapModels(i, reg);
     }
 
     @Override
