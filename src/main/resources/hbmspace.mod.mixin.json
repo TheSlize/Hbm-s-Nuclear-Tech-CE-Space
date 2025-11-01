@@ -7,6 +7,8 @@
   "client": [
   ],
   "mixins": [
+    "hbm.MixinPacketDispatcher",
+    "hbm.MixinPermaSyncHandler"
   ],
   "server": [],
   "setSourceFile": true,

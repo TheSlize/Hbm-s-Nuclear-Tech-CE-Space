@@ -1,13 +1,10 @@
 package com.hbmspace.main;
 
-import com.hbm.packet.PacketDispatcher;
 import com.hbm.render.amlfrom1710.Vec3;
 import com.hbm.util.ParticleUtil;
 import com.hbmspace.dim.*;
 import com.hbmspace.dim.trait.CBT_Atmosphere;
-import com.hbmspace.packet.toclient.PermaSyncPacket;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraftforge.event.terraingen.OreGenEvent;
@@ -63,11 +60,6 @@ public class ModEventHandler {
                     ParticleUtil.spawnGasFlame(player.world, player.posX - 1 + vec.xCoord, player.posY + vec.yCoord, player.posZ + vec.zCoord, 0, 0, 0);
                 }
             }
-        }
-        if (!player.world.isRemote && event.phase == TickEvent.Phase.START) {
-            /// SYNC START ///
-            if(player instanceof EntityPlayerMP playerMP) PacketDispatcher.wrapper.sendTo(new PermaSyncPacket(playerMP), playerMP);
-            /// SYNC END ///
         }
     }
 

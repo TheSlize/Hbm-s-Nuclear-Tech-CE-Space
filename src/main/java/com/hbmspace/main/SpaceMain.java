@@ -1,7 +1,6 @@
 package com.hbmspace.main;
 
 import com.hbm.handler.GuiHandler;
-import com.hbmspace.packet.PacketDispatcherSpace;
 import com.hbmspace.config.SpaceConfig;
 import com.hbmspace.world.ModBiomes;
 import com.hbmspace.world.PlanetGen;
@@ -47,7 +46,6 @@ public class SpaceMain {
 
 
         reloadConfig();
-        PacketDispatcherSpace.registerPackets();
 
         ModItemsSpace.preInit();
         ModBlocksSpace.preInit();

@@ -1,26 +1,32 @@
-package com.hbmspace.packet;
+package com.hbmspace.mixin.mod.hbm;
 
-import com.hbm.handler.pollution.PollutionHandler;
 import com.hbm.main.MainRegistry;
+import com.hbm.packet.PermaSyncHandler;
 import com.hbmspace.dim.CelestialBody;
 import com.hbmspace.dim.SolarSystemWorldSavedData;
 import com.hbmspace.dim.WorldProviderCelestial;
 import com.hbmspace.dim.trait.CelestialBodyTrait;
 import io.netty.buffer.ByteBuf;
-import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.HashMap;
 
-public class PermaSyncHandler {
+/**
+ * Mixins using ordinals are brittle and must be updated when PermaSyncHandler changes.
+ *
+ * @author mlbv
+ */
+@Mixin(value = PermaSyncHandler.class, remap = false)
+public class MixinPermaSyncHandler {
 
-    public static IntOpenHashSet boykissers = new IntOpenHashSet();
-    public static float[] pollution = new float[PollutionHandler.PollutionType.values().length];
-
-    public static void writePacket(ByteBuf buf, World world, EntityPlayerMP player) {
-
+    @Inject(method = "writePacket", at = @At(value = "FIELD", target = "Lcom/hbm/saveddata/satellites/SatelliteSavedData;sats:Lit/unimi/dsi/fastutil/ints/Int2ObjectOpenHashMap;", shift = At.Shift.BEFORE))
+    private static void beforeSatelliteWrite(ByteBuf buf, World world, EntityPlayerMP player, CallbackInfo ci) {
         /// CBT ///
         if(world.getTotalWorldTime() % 5 == 1) { // update a little less frequently to not blast the players with large packets
             buf.writeBoolean(true);
@@ -49,19 +55,22 @@ public class PermaSyncHandler {
             buf.writeBoolean(false);
         }
         /// CBT ///
+    }
 
+    @Inject(method = "writePacket", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/EntityPlayerMP;getRidingEntity()Lnet/minecraft/entity/Entity;", shift = At.Shift.BEFORE, ordinal = 0))
+    private static void beforeDesyncFixWrite(ByteBuf buf, World world, EntityPlayerMP player, CallbackInfo ci) {
         /// TIME OF DAY ///
-        if(world.provider instanceof WorldProviderCelestial && world.provider.getDimension() != 0) {
+        if(world.provider instanceof WorldProviderCelestial celestial && world.provider.getDimension() != 0) {
             buf.writeBoolean(true);
-            ((WorldProviderCelestial) world.provider).serialize(buf);
+            celestial.serialize(buf);
         } else {
             buf.writeBoolean(false);
         }
         /// TIME OF DAY ///
     }
 
-    public static void readPacket(ByteBuf buf, World world, EntityPlayer player) {
-
+    @Inject(method = "readPacket", at = @At(value = "INVOKE", target = "Lio/netty/buffer/ByteBuf;readInt()I", ordinal = 1, shift = At.Shift.BEFORE), cancellable = true)
+    private static void beforeSatelliteRead(ByteBuf buf, World world, EntityPlayer player, CallbackInfo ci) {
         /// CBT ///
         if(buf.readBoolean()) {
             try {
@@ -91,11 +100,14 @@ public class PermaSyncHandler {
                 MainRegistry.logger.catching(ex);
                 SolarSystemWorldSavedData.updateClientTraits(null);
 
-                return;
+                ci.cancel();
             }
         }
         /// CBT ///
+    }
 
+    @Inject(method = "readPacket", at = @At(value = "INVOKE", target = "Lcom/hbm/saveddata/satellites/SatelliteSavedData;setClientSats(Lit/unimi/dsi/fastutil/ints/Int2ObjectOpenHashMap;)V", shift = At.Shift.AFTER))
+    private static void afterSatelliteRead(ByteBuf buf, World world, EntityPlayer player, CallbackInfo ci) {
         /// TIME OF DAY ///
         if(buf.readBoolean() && world.provider instanceof WorldProviderCelestial) {
             ((WorldProviderCelestial) world.provider).deserialize(buf);
