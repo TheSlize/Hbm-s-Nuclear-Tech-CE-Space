@@ -262,6 +262,14 @@ public class BlockOre extends net.minecraft.block.BlockOre implements ICustomBlo
         }
     }
 
+    /**
+     * A texture that fully replaces the stone+overlay composite for the given meta.
+     * Used by blocks that stand in for an NTM block, so their original appearance is kept.
+     */
+    public ResourceLocation getSolidTextureOverride(int meta) {
+        return null;
+    }
+
     @Override
     @SideOnly(Side.CLIENT)
     public void registerSprite(TextureMap map) {
@@ -271,6 +279,9 @@ public class BlockOre extends net.minecraft.block.BlockOre implements ICustomBlo
         for (int i = 0; i < META_COUNT; i++) {
             String stone = getStoneTextureName(SolarSystem.Body.values()[i]);
             map.registerSprite(resolveTexture(stone));
+
+            ResourceLocation override = getSolidTextureOverride(i);
+            if (override != null) map.registerSprite(override);
         }
     }
 
@@ -283,6 +294,16 @@ public class BlockOre extends net.minecraft.block.BlockOre implements ICustomBlo
             String oreTex = new ResourceLocation(Tags.MODID, "blocks/" + this.getRegistryName().getPath()).toString();
 
             for (int meta = 0; meta < META_COUNT; meta++) {
+                ModelResourceLocation mrlOverride = new ModelResourceLocation(this.getRegistryName(), "meta=" + meta);
+                ResourceLocation solid = getSolidTextureOverride(meta);
+
+                if (solid != null) {
+                    IModel plain = cube.retexture(ImmutableMap.of("all", solid.toString()));
+                    event.getModelRegistry().putObject(mrlOverride,
+                            plain.bake(ModelRotation.X0_Y0, DefaultVertexFormats.BLOCK, ModelLoader.defaultTextureGetter()));
+                    continue;
+                }
+
                 String stoneTex = resolveTexture(getStoneTextureName(SolarSystem.Body.values()[meta])).toString();
 
                 IModel baseStone = cube.retexture(ImmutableMap.of("all", stoneTex));

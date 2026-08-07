@@ -5,6 +5,7 @@ import com.hbm.lib.ForgeDirection;
 import com.hbm.tileentity.machine.oil.TileEntityOilDrillBase;
 import com.hbm.util.BobMathUtil;
 import com.hbmspace.blocks.generic.BlockOreFluid;
+import com.hbmspace.util.OilReserveUtil;
 import com.hbmspace.util.OilSpaceUtil;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
@@ -29,7 +30,7 @@ public abstract class MixinTileEntityOilDrillBase {
 
     @Overwrite
     public boolean canSuckBlock(Block b) {
-        return (b instanceof BlockOreFluid) || BlockOreFluid.getFullBlock(b) != null;
+        return OilReserveUtil.isReserve(b);
     }
 
     @Overwrite
@@ -55,12 +56,16 @@ public abstract class MixinTileEntityOilDrillBase {
             nodesVisited++;
             Block currentBlock = world.getBlockState(currentPos).getBlock();
 
-            if (currentBlock instanceof BlockOreFluid) {
+            if (BlockOreFluid.isFullReserve(currentBlock)) {
                 onSuck((BlockOreFluid) currentBlock, currentPos);
                 return true;
             }
 
-            if (BlockOreFluid.getFullBlock(currentBlock) == null) continue;
+            // NTM's own oil block only survives the replacement failing; refuse to extract, but
+            // report success so the machine idles instead of drilling the deposit away
+            if (OilReserveUtil.isFullReserve(currentBlock)) return true;
+
+            if (!OilReserveUtil.isDrainedReserve(currentBlock)) continue;
 
             for (ForgeDirection dir : BobMathUtil.getShuffledDirs()) {
                 BlockPos neighborPos = currentPos.add(dir.offsetX, dir.offsetY, dir.offsetZ);

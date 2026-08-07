@@ -20,9 +20,10 @@ public abstract class MixinTileEntityMachineFrackingTower extends TileEntityOilD
     @Shadow protected static int solutionRequired;
 
     public void onSuck(BlockOreFluid block, BlockPos targetPos) {
-        OilSpaceUtil.defaultOnSuck((TileEntity) (Object) this, block, targetPos, tanks);
-        IBlockState state = this.world.getBlockState(pos);
+        IBlockState state = this.world.getBlockState(targetPos);
         int meta = state.getBlock().getMetaFromState(state);
+
+        OilSpaceUtil.defaultOnSuck((TileEntity) (Object) this, block, targetPos, tanks);
 
         tanks[2].setFill(tanks[2].getFill() - solutionRequired);
 

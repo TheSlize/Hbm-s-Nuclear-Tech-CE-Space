@@ -199,6 +199,7 @@ public class SpaceMain {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         ModFluidsSpace.setFromRegistry();
+        ModBlocksReplaceHandler.verifyReplacements();
 
         new OreLayer3DSpace(ModBlocksSpace.stone_resource, BlockEnumsSpace.EnumStoneType.CONGLOMERATE.ordinal()).setDimension(SpaceConfig.moonDimension).setScaleH(0.04D).setScaleV(0.25D).setThreshold(220);
         new OreLayer3DSpace(ModBlocksSpace.stone_resource, BlockEnumsSpace.EnumStoneType.CONGLOMERATE.ordinal()).setDimension(SpaceConfig.ikeDimension).setScaleH(0.04D).setScaleV(0.25D).setThreshold(220);

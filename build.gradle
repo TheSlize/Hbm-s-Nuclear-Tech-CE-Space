@@ -1660,3 +1660,7 @@ jvmdg {
     shadeInlining = false
 }
 // End JVMDG configuration
+
+configurations.configureEach {
+    resolutionStrategy.force 'mezz:jei:4.29.14'
+}
