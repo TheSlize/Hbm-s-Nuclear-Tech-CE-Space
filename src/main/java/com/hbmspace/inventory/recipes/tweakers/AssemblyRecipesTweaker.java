@@ -126,13 +126,13 @@ public class AssemblyRecipesTweaker {
                         new RecipesCommon.OreDictStack(STEEL.plate(), 32),
                         new RecipesCommon.ComparableStack(ModItems.drill_titanium, 1),
                         new RecipesCommon.ComparableStack(ModItems.motor_bismuth),
-                        new RecipesCommon.ComparableStack(ModItems.circuit, 8, ItemEnumsSpace.EnumCircuitType.GASCHIP))
+                        new RecipesCommon.ComparableStack(ModItemsSpace.circuit, 8, ItemEnumsSpace.EnumCircuitType.GASCHIP))
                 .inputItemsEx(
                         new RecipesCommon.ComparableStack(ModItemsSpace.item_expensive, 6, ItemEnumsSpace.EnumExpensiveType.STAINLESS_BEAM),
                         new RecipesCommon.OreDictStack(W.plateWelded(), 4),
                         new RecipesCommon.ComparableStack(ModItems.drill_titanium, 1),
                         new RecipesCommon.ComparableStack(ModItems.motor_bismuth, 4),
-                        new RecipesCommon.ComparableStack(ModItems.circuit, 24, ItemEnumsSpace.EnumCircuitType.GASCHIP))
+                        new RecipesCommon.ComparableStack(ModItemsSpace.circuit, 24, ItemEnumsSpace.EnumCircuitType.GASCHIP))
                 .setPools528(GenericRecipes.POOL_PREFIX_528 + "gaschip"));
 
         recs.register(new GenericRecipe("ass.hydrobay").setup(400, 100).outputItems(new ItemStack(ModBlocksSpace.hydrobay, 1))
@@ -207,7 +207,7 @@ public class AssemblyRecipesTweaker {
                 .inputItemsEx(
                         new RecipesCommon.OreDictStack(OreDictManagerSpace.STAINLESS.plateWelded(), 4),
                         new RecipesCommon.ComparableStack(ModItems.item_expensive, 4, ItemEnums.EnumExpensiveType.STEEL_PLATING),
-                        new RecipesCommon.ComparableStack(ModItemsSpace.circuit, 8, ItemEnums.EnumCircuitType.CAPACITOR),
+                        new RecipesCommon.ComparableStack(ModItems.circuit, 8, ItemEnums.EnumCircuitType.CAPACITOR),
                         new RecipesCommon.ComparableStack(ModItems.catalyst_clay, 12),
                         new RecipesCommon.ComparableStack(ModItems.coil_tungsten, 8))
                 .setPools528(GenericRecipes.POOL_PREFIX_528 + "stainless"));
@@ -268,7 +268,7 @@ public class AssemblyRecipesTweaker {
                         new RecipesCommon.OreDictStack(CU.wireFine(), 8),
                         new RecipesCommon.OreDictStack(STEEL.plateCast(), 2),
                         new RecipesCommon.ComparableStack(ModItems.crt_display, 2),
-                        new RecipesCommon.ComparableStack(ModItemsSpace.circuit, 2, ItemEnums.EnumCircuitType.BASIC))
+                        new RecipesCommon.ComparableStack(ModItems.circuit, 2, ItemEnums.EnumCircuitType.BASIC))
                 .inputItemsEx(
                         new RecipesCommon.OreDictStack(ANY_RUBBER.ingot(), 2),
                         new RecipesCommon.ComparableStack(ModItems.item_expensive, 4, ItemEnums.EnumExpensiveType.STEEL_PLATING),
@@ -281,7 +281,7 @@ public class AssemblyRecipesTweaker {
                         new RecipesCommon.OreDictStack(STEEL.plateWelded(), 4),
                         new RecipesCommon.OreDictStack(W.wireFine(), 16),
                         new RecipesCommon.ComparableStack(ModItems.turbine_titanium, 1),
-                        new RecipesCommon.ComparableStack(ModItemsSpace.circuit, 2, ItemEnums.EnumCircuitType.ADVANCED)));
+                        new RecipesCommon.ComparableStack(ModItems.circuit, 2, ItemEnums.EnumCircuitType.ADVANCED)));
 
         recs.register(new GenericRecipe("ass.solarpanel").setup(100, 100).outputItems(new ItemStack(ModBlocksSpace.machine_solar, 1))
                 .inputItems(
