@@ -6,6 +6,7 @@ import com.hbm.render.model.BakedModelTransforms;
 import com.hbmspace.blocks.generic.BlockAlgaeFilm;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.EnumFacing;
@@ -13,6 +14,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,6 +24,25 @@ public class BlockAlgaeBakedModel extends AbstractWavefrontBakedModel {
     private final TextureAtlasSprite sprite;
     private final boolean forBlock;
 
+    // woo-hoo reverse compat! So at least github will build the mod...
+    private static final ItemCameraTransforms DECO_TRANSFORMS = resolveDecoTransforms();
+
+    private static ItemCameraTransforms resolveDecoTransforms() {
+        try {
+            Method isbrh = BakedModelTransforms.class.getMethod("isbrh");
+            return (ItemCameraTransforms) isbrh.invoke(null);
+        } catch (ReflectiveOperationException ignored) {
+        }
+
+        try {
+            Method standardBlock = BakedModelTransforms.class.getMethod("standardBlock");
+            Method forDeco = BakedModelTransforms.class.getMethod("forDeco", ItemCameraTransforms.class);
+            return (ItemCameraTransforms) forDeco.invoke(null, standardBlock.invoke(null));
+        } catch (ReflectiveOperationException e) {
+            throw new IllegalStateException("BakedModelTransforms has neither isbrh() nor forDeco(standardBlock())", e);
+        }
+    }
+
     // Cache for 4 horizontal directions (indices 2-5, mapped to 0-3)
     @SuppressWarnings("unchecked")
     private final List<BakedQuad>[] cache = new List[4];
@@ -29,7 +50,7 @@ public class BlockAlgaeBakedModel extends AbstractWavefrontBakedModel {
 
     public BlockAlgaeBakedModel(HFRWavefrontObject model, TextureAtlasSprite sprite, boolean forBlock, float ty) {
         // ty is -0.5F to shift the model from center (standard 1.12) to bottom (1.7.10 behavior)
-        super(model, DefaultVertexFormats.ITEM, 1.0F, 0.0F, ty, 0.0F, BakedModelTransforms.forDeco(BakedModelTransforms.standardBlock()));
+        super(model, DefaultVertexFormats.ITEM, 1.0F, 0.0F, ty, 0.0F, DECO_TRANSFORMS);
         this.sprite = sprite;
         this.forBlock = forBlock;
     }
