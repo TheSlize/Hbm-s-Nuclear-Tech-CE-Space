@@ -1,6 +1,7 @@
 package com.hbmspace.dim.minmus;
 
 import com.hbm.blocks.BlockEnums;
+import com.hbm.config.CompatibilityConfig;
 import com.hbm.world.gen.nbt.NBTStructure;
 import com.hbmspace.blocks.ModBlocksSpace;
 import com.hbmspace.config.SpaceConfig;
@@ -69,9 +70,9 @@ public class WorldGeneratorMinmus implements IWorldGenerator {
         Block stone = ((WorldProviderCelestial) world.provider).getStone();
 
         WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfigSpace.nickelSpawn, 8, 1, 43, ModBlocksSpace.ore_nickel.getStateFromMeta(meta), stone);
-        WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfig.titaniumSpawn, 12, 4, 27, ModBlocksSpace.ore_titanium.getStateFromMeta(meta), stone);
+        WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfig.convertToInt(CompatibilityConfig.titaniumSpawn.get(0)), 12, 4, 27, ModBlocksSpace.ore_titanium.getStateFromMeta(meta), stone);
         WorldGeneratorCelestial.generateOre(world, rand, i, j, 1, 16, 6, 40, ModBlocksSpace.stone_resource.getStateFromMeta(BlockEnums.EnumStoneType.MALACHITE.ordinal()), stone);
-        WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfig.copperSpawn * 3, 12, 8, 56, ModBlocksSpace.ore_copper.getStateFromMeta(meta), stone);
+        WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfig.convertToInt(CompatibilityConfig.copperSpawn.get(0)) * 3, 12, 8, 56, ModBlocksSpace.ore_copper.getStateFromMeta(meta), stone);
 	}
 
 

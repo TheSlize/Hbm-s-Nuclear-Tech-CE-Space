@@ -1,6 +1,7 @@
 package com.hbmspace.dim.moho;
 
 import com.hbm.blocks.ModBlocks;
+import com.hbm.config.CompatibilityConfig;
 import com.hbm.config.WorldConfig;
 import com.hbm.world.gen.nbt.NBTStructure;
 import com.hbmspace.blocks.ModBlocksSpace;
@@ -81,7 +82,7 @@ public class WorldGeneratorMoho implements IWorldGenerator {
         WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfigSpace.mineralSpawn, 10, 12, 32, ModBlocksSpace.ore_mineral.getStateFromMeta(meta), stone);
 
         WorldGeneratorCelestial.generateOre(world, rand, i, j, 14, 12, 5, 30, ModBlocksSpace.ore_glowstone.getStateFromMeta(meta), stone);
-        WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfig.netherPhosphorusSpawn, 6, 8, 64, ModBlocksSpace.ore_fire.getStateFromMeta(meta), stone);
+        WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfig.convertToInt(CompatibilityConfig.netherPhosphorusSpawn.get(-1)), 6, 8, 64, ModBlocksSpace.ore_fire.getStateFromMeta(meta), stone);
         WorldGeneratorCelestial.generateOre(world, rand, i, j, 8, 4, 0, 24, ModBlocksSpace.ore_australium.getStateFromMeta(meta), stone);
 
         WorldGeneratorCelestial.generateOre(world, rand, i, j, 1, 12, 8, 32, ModBlocksSpace.ore_shale.getStateFromMeta(meta), stone);

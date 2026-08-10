@@ -1,6 +1,7 @@
 package com.hbmspace.dim.laythe;
 
 import com.hbm.blocks.ModBlocks;
+import com.hbm.config.CompatibilityConfig;
 import com.hbmspace.blocks.ModBlocksSpace;
 import com.hbmspace.blocks.generic.BlockOre;
 import com.hbmspace.config.SpaceConfig;
@@ -56,7 +57,7 @@ public class WorldGeneratorLaythe implements IWorldGenerator {
 		int meta = CelestialBody.getMeta(world);
         Block stone = ((WorldProviderCelestial) world.provider).getStone();
         // a'ight, I'll leave the old oil generation here for now
-		if(WorldConfig.laytheOilSpawn > 0 && rand.nextInt(WorldConfig.laytheOilSpawn) == 0) {
+		if(WorldConfig.convertToInt(CompatibilityConfig.laytheOilSpawn.get(0)) > 0 && rand.nextInt(WorldConfig.convertToInt(CompatibilityConfig.laytheOilSpawn.get(0))) == 0) {
 			int randPosX = i + rand.nextInt(16);
 			int randPosY = rand.nextInt(25);
 			int randPosZ = j + rand.nextInt(16);
@@ -64,9 +65,9 @@ public class WorldGeneratorLaythe implements IWorldGenerator {
 			GenUtil.spawnOil(world, randPosX, randPosY, randPosZ, 10 + rand.nextInt(7), ModBlocks.ore_oil, meta, Blocks.STONE);
 		}
 
-        WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfig.asbestosSpawn, 4, 16, 16, ModBlocksSpace.ore_asbestos.getStateFromMeta(meta), stone);
-        WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfig.berylliumSpawn, 4, 5, 30, ModBlocksSpace.ore_beryllium.getStateFromMeta(meta), stone);
-        WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfig.rareSpawn, 5, 5, 20, ModBlocksSpace.ore_rare.getStateFromMeta(meta), stone);
+        WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfig.convertToInt(CompatibilityConfig.asbestosSpawn.get(0)), 4, 16, 16, ModBlocksSpace.ore_asbestos.getStateFromMeta(meta), stone);
+        WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfig.convertToInt(CompatibilityConfig.berylliumSpawn.get(0)), 4, 5, 30, ModBlocksSpace.ore_beryllium.getStateFromMeta(meta), stone);
+        WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfig.convertToInt(CompatibilityConfig.rareSpawn.get(0)), 5, 5, 20, ModBlocksSpace.ore_rare.getStateFromMeta(meta), stone);
 
     }
     

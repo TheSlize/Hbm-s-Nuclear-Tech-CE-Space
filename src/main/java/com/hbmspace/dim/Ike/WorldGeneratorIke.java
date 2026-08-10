@@ -1,6 +1,7 @@
 package com.hbmspace.dim.Ike;
 
 import com.hbm.blocks.ModBlocks;
+import com.hbm.config.CompatibilityConfig;
 import com.hbm.world.dungeon.AncientTombStructure;
 import com.hbm.world.gen.nbt.NBTStructure;
 import com.hbmspace.blocks.ModBlocksSpace;
@@ -50,10 +51,10 @@ public class WorldGeneratorIke implements IWorldGenerator {
 		int meta = CelestialBody.getMeta(world);
         Block stone = ((WorldProviderCelestial) world.provider).getStone();
 
-        WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfig.asbestosSpawn, 8, 3, 22, ModBlocksSpace.ore_asbestos.getStateFromMeta(meta), stone);
-        WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfig.copperSpawn, 9, 4, 27, ModBlocksSpace.ore_copper.getStateFromMeta(meta), stone);
+        WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfig.convertToInt(CompatibilityConfig.asbestosSpawn.get(0)), 8, 3, 22, ModBlocksSpace.ore_asbestos.getStateFromMeta(meta), stone);
+        WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfig.convertToInt(CompatibilityConfig.copperSpawn.get(0)), 9, 4, 27, ModBlocksSpace.ore_copper.getStateFromMeta(meta), stone);
         WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfigSpace.ironSpawn,  8, 1, 33, ModBlocksSpace.ore_iron.getStateFromMeta(meta), stone);
-        WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfig.lithiumSpawn,  6, 4, 8, ModBlocksSpace.ore_lithium.getStateFromMeta(meta), stone);
+        WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfig.convertToInt(CompatibilityConfig.lithiumSpawn.get(0)),  6, 4, 8, ModBlocksSpace.ore_lithium.getStateFromMeta(meta), stone);
         WorldGeneratorCelestial.generateOre(world, rand, i, j, 2, 4, 15, 40, ModBlocks.ore_coltan.getStateFromMeta(meta), stone);
 		
 		//okay okay okay, lets say on duna you DO make solvent, this is now awesome because you can now make gallium arsenide to then head to
@@ -62,7 +63,7 @@ public class WorldGeneratorIke implements IWorldGenerator {
 		
         WorldGeneratorCelestial.generateOre(world, rand, i, j, WorldConfigSpace.mineralSpawn, 10, 12, 32, ModBlocksSpace.ore_mineral.getStateFromMeta(meta), stone);
 
-        if(WorldConfig.pyramidStructure > 0 && rand.nextInt(WorldConfig.pyramidStructure) == 0) {
+        if(WorldConfig.convertToInt(CompatibilityConfig.pyramidStructure.get(0)) > 0 && rand.nextInt(WorldConfig.convertToInt(CompatibilityConfig.pyramidStructure.get(0))) == 0) {
             int x = i + rand.nextInt(16);
             int z = j + rand.nextInt(16);
             int y = world.getHeight(x, z);

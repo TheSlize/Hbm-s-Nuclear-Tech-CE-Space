@@ -2,6 +2,7 @@ package com.hbmspace.dim.tekto;
 
 import java.util.Random;
 
+import com.hbm.config.CompatibilityConfig;
 import com.hbm.config.WorldConfig;
 import com.hbmspace.blocks.ModBlocksSpace;
 import com.hbmspace.blocks.generic.BlockOre;
@@ -42,7 +43,7 @@ public class WorldGeneratorTekto implements IWorldGenerator {
         int meta = CelestialBody.getMeta(world);
         Block stone = ((WorldProviderCelestial) world.provider).getStone();
 
-        DungeonToolbox.generateOre(world, rand, i, j, WorldConfig.cobaltSpawn * 2,  6, 4, 8, ModBlocksSpace.ore_cobalt.getStateFromMeta(meta), stone);
+        DungeonToolbox.generateOre(world, rand, i, j, WorldConfig.convertToInt(CompatibilityConfig.cobaltSpawn.get(0)) * 2,  6, 4, 8, ModBlocksSpace.ore_cobalt.getStateFromMeta(meta), stone);
 
         Biome biome = world.getBiome(new BlockPos(i + 16, 0, j + 16));
 

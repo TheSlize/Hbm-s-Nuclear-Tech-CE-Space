@@ -2,6 +2,7 @@ package com.hbmspace.dim;
 
 import com.google.common.base.Predicate;
 import com.hbm.blocks.ModBlocks;
+import com.hbm.config.CompatibilityConfig;
 import com.hbm.config.WorldConfig;
 import com.hbm.inventory.fluid.FluidStack;
 import com.hbm.items.ModItems;
@@ -115,29 +116,30 @@ public class WorldGeneratorCelestial implements IWorldGenerator {
         DepthDeposit.generateCondition(world, x, 0, 3, z, 5, 0.8D, ModBlocks.ore_depth_zirconium, rand, 16, planetStone, ModBlocks.stone_depth);
         DepthDeposit.generateCondition(world, x, 0, 3, z, 5, 0.8D, ModBlocks.ore_depth_borax, rand, 16, planetStone, ModBlocks.stone_depth);
 
-        generateOre(world, rand, x, z, WorldConfig.uraniumSpawn, 5, 5, 20, ModBlocksSpace.ore_uranium.getStateFromMeta(meta), planetStone);
-        generateOre(world, rand, x, z, WorldConfig.thoriumSpawn, 5, 5, 25, ModBlocksSpace.ore_thorium.getStateFromMeta(meta), planetStone);
-        generateOre(world, rand, x, z, WorldConfig.titaniumSpawn, 6, 5, 30, ModBlocksSpace.ore_titanium.getStateFromMeta(meta), planetStone);
-        generateOre(world, rand, x, z, WorldConfig.sulfurSpawn, 8, 5, 30, ModBlocksSpace.ore_sulfur.getStateFromMeta(meta), planetStone);
-        generateOre(world, rand, x, z, WorldConfig.aluminiumSpawn, 6, 5, 40, ModBlocksSpace.ore_aluminium.getStateFromMeta(meta), planetStone);
-        generateOre(world, rand, x, z, WorldConfig.copperSpawn, 6, 5, 45, ModBlocksSpace.ore_copper.getStateFromMeta(meta), planetStone);
+        // TODO compatibilityconfig is a crunch here, do smth about it
+        generateOre(world, rand, x, z, WorldConfig.convertToInt(CompatibilityConfig.uraniumSpawn.get(0)), 5, 5, 20, ModBlocksSpace.ore_uranium.getStateFromMeta(meta), planetStone);
+        generateOre(world, rand, x, z, WorldConfig.convertToInt(CompatibilityConfig.thoriumSpawn.get(0)), 5, 5, 25, ModBlocksSpace.ore_thorium.getStateFromMeta(meta), planetStone);
+        generateOre(world, rand, x, z, WorldConfig.convertToInt(CompatibilityConfig.titaniumSpawn.get(0)), 6, 5, 30, ModBlocksSpace.ore_titanium.getStateFromMeta(meta), planetStone);
+        generateOre(world, rand, x, z, WorldConfig.convertToInt(CompatibilityConfig.sulfurSpawn.get(0)), 8, 5, 30, ModBlocksSpace.ore_sulfur.getStateFromMeta(meta), planetStone);
+        generateOre(world, rand, x, z, WorldConfig.convertToInt(CompatibilityConfig.aluminiumSpawn.get(0)), 6, 5, 40, ModBlocksSpace.ore_aluminium.getStateFromMeta(meta), planetStone);
+        generateOre(world, rand, x, z, WorldConfig.convertToInt(CompatibilityConfig.copperSpawn.get(0)), 6, 5, 45, ModBlocksSpace.ore_copper.getStateFromMeta(meta), planetStone);
         generateOre(world, rand, x, z, WorldConfigSpace.nickelSpawn, 6, 5, 10, ModBlocksSpace.ore_nickel.getStateFromMeta(meta), planetStone);
         generateOre(world, rand, x, z, WorldConfigSpace.zincSpawn, 6, 5, 32, ModBlocksSpace.ore_zinc.getStateFromMeta(meta), planetStone);
         //generateOre(world, rand, x, z, WorldConfig.mineralSpawn, 10, 12, 32, ModBlocks.ore_mineral, meta, planetStone);
-        generateOre(world, rand, x, z, WorldConfig.fluoriteSpawn, 4, 5, 45, ModBlocksSpace.ore_fluorite.getStateFromMeta(meta), planetStone);
-        generateOre(world, rand, x, z, WorldConfig.niterSpawn, 6, 5, 30, ModBlocksSpace.ore_niter.getStateFromMeta(meta), planetStone);
-        generateOre(world, rand, x, z, WorldConfig.tungstenSpawn, 8, 5, 30, ModBlocksSpace.ore_tungsten.getStateFromMeta(meta), planetStone);
-        generateOre(world, rand, x, z, WorldConfig.leadSpawn, 9, 5, 30, ModBlocksSpace.ore_lead.getStateFromMeta(meta), planetStone);
-        generateOre(world, rand, x, z, WorldConfig.berylliumSpawn, 4, 5, 30, ModBlocksSpace.ore_beryllium.getStateFromMeta(meta), planetStone);
-        generateOre(world, rand, x, z, WorldConfig.rareSpawn, 5, 5, 20, ModBlocksSpace.ore_rare.getStateFromMeta(meta), planetStone);
+        generateOre(world, rand, x, z, WorldConfig.convertToInt(CompatibilityConfig.fluoriteSpawn.get(0)), 4, 5, 45, ModBlocksSpace.ore_fluorite.getStateFromMeta(meta), planetStone);
+        generateOre(world, rand, x, z, WorldConfig.convertToInt(CompatibilityConfig.niterSpawn.get(0)), 6, 5, 30, ModBlocksSpace.ore_niter.getStateFromMeta(meta), planetStone);
+        generateOre(world, rand, x, z, WorldConfig.convertToInt(CompatibilityConfig.tungstenSpawn.get(0)), 8, 5, 30, ModBlocksSpace.ore_tungsten.getStateFromMeta(meta), planetStone);
+        generateOre(world, rand, x, z, WorldConfig.convertToInt(CompatibilityConfig.leadSpawn.get(0)), 9, 5, 30, ModBlocksSpace.ore_lead.getStateFromMeta(meta), planetStone);
+        generateOre(world, rand, x, z, WorldConfig.convertToInt(CompatibilityConfig.berylliumSpawn.get(0)), 4, 5, 30, ModBlocksSpace.ore_beryllium.getStateFromMeta(meta), planetStone);
+        generateOre(world, rand, x, z, WorldConfig.convertToInt(CompatibilityConfig.rareSpawn.get(0)), 5, 5, 20, ModBlocksSpace.ore_rare.getStateFromMeta(meta), planetStone);
         // generateOre(world, rand, x, z, WorldConfig.asbestosSpawn, 4, 16, 16, ModBlocks.ore_asbestos, meta, planetStone);
-        generateOre(world, rand, x, z, WorldConfig.cinnabarSpawn, 4, 8, 16, ModBlocksSpace.ore_cinnabar.getStateFromMeta(meta), planetStone);
-        generateOre(world, rand, x, z, WorldConfig.cobaltSpawn, 4, 4, 8, ModBlocksSpace.ore_cobalt.getStateFromMeta(meta), planetStone);
+        generateOre(world, rand, x, z, WorldConfig.convertToInt(CompatibilityConfig.cinnabarSpawn.get(0)), 4, 8, 16, ModBlocksSpace.ore_cinnabar.getStateFromMeta(meta), planetStone);
+        generateOre(world, rand, x, z, WorldConfig.convertToInt(CompatibilityConfig.cobaltSpawn.get(0)), 4, 4, 8, ModBlocksSpace.ore_cobalt.getStateFromMeta(meta), planetStone);
 
-        generateOre(world, rand, x, z, WorldConfig.ironClusterSpawn, 6, 15, 45, ModBlocksSpace.cluster_iron.getStateFromMeta(meta), planetStone);
-        generateOre(world, rand, x, z, WorldConfig.titaniumClusterSpawn, 6, 15, 30, ModBlocksSpace.cluster_titanium.getStateFromMeta(meta), planetStone);
-        generateOre(world, rand, x, z, WorldConfig.aluminiumClusterSpawn, 6, 15, 35, ModBlocksSpace.cluster_aluminium.getStateFromMeta(meta), planetStone);
-        generateOre(world, rand, x, z, WorldConfig.copperClusterSpawn, 6, 15, 20, ModBlocksSpace.cluster_copper.getStateFromMeta(meta), planetStone);
+        generateOre(world, rand, x, z, WorldConfig.convertToInt(CompatibilityConfig.ironClusterSpawn.get(0)), 6, 15, 45, ModBlocksSpace.cluster_iron.getStateFromMeta(meta), planetStone);
+        generateOre(world, rand, x, z, WorldConfig.convertToInt(CompatibilityConfig.titaniumClusterSpawn.get(0)), 6, 15, 30, ModBlocksSpace.cluster_titanium.getStateFromMeta(meta), planetStone);
+        generateOre(world, rand, x, z, WorldConfig.convertToInt(CompatibilityConfig.aluminiumSpawn.get(0)), 6, 15, 35, ModBlocksSpace.cluster_aluminium.getStateFromMeta(meta), planetStone);
+        generateOre(world, rand, x, z, WorldConfig.convertToInt(CompatibilityConfig.copperClusterSpawn.get(0)), 6, 15, 20, ModBlocksSpace.cluster_copper.getStateFromMeta(meta), planetStone);
 
         generateOre(world, rand, x, z, WorldConfig.limestoneSpawn, 12, 25, 30, ModBlocksSpace.stone_resource.getStateFromMeta(BlockEnumsSpace.EnumStoneType.CALCIUM.ordinal()), planetStone);
 

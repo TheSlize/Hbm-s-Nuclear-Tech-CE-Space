@@ -1,6 +1,7 @@
 package com.hbmspace.dim.Ike;
 
 import com.hbm.blocks.ModBlocks;
+import com.hbm.config.CompatibilityConfig;
 import com.hbm.config.WorldConfig;
 import com.hbmspace.blocks.ModBlocksSpace;
 import com.hbmspace.config.WorldConfigSpace;
@@ -28,7 +29,7 @@ public class ChunkProviderIke extends ChunkProviderCelestial {
 	private final MapGenTiltedSpires spires = new MapGenTiltedSpires(6, 6, 0F);
 
     private final MapGenBubble brine = new MapGenBubble(WorldConfigSpace.ikeBrineSpawn);
-    private final MapGenCrater sellafield = new MapGenCrater(WorldConfig.radfreq / 10);
+	private final MapGenCrater sellafield = new MapGenCrater(WorldConfig.convertToInt(CompatibilityConfig.radfreq.get(0)) / 10);
 
 	public ChunkProviderIke(World world, long seed, boolean hasMapFeatures) {
 		super(world, seed, hasMapFeatures);
